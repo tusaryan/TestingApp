@@ -1,3 +1,12 @@
+HELP.md
+
+### STS ###
+.apt_generated
+.factorypath
+.settings
+.springBeans
+.sts4-cache
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -16,6 +25,29 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
 # general
 /.idea/
 /logs/
+
+
+# .mvn/**      # Ignore everything in the .mvn directory
+# !**/src/main/**/target/   # Except the maven-wrapper.jar file
