@@ -1,18 +1,20 @@
 package com.tusaryan.TestingApp.entities;
 
 
-/*import jakarta.persistence.*;*/
+import jakarta.persistence.*;
 import lombok.*;
 
-/*@Getter
+//L7.4
+
+@Getter
 @Setter
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor*/
+@NoArgsConstructor
 public class Employee {
 
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,5 +23,5 @@ public class Employee {
 
     private String name;
 
-    private Long salary;*/
+    private Long salary;
 }

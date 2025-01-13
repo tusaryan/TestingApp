@@ -8,16 +8,17 @@ import com.tusaryan.TestingApp.repositories.EmployeeRepository;
 import com.tusaryan.TestingApp.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-/*import org.modelmapper.ModelMapper;*/
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//L7.4
+//we have also added a lot of logs here as an industry standard to debug code easily
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
-/*
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
 
@@ -30,6 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     return new ResourceNotFoundException("Employee not found with id: " + id);
                 });
         log.info("Successfully fetched employee with id: {}", id);
+        //converting to employeeDto using modelMapper
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
@@ -81,5 +83,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.deleteById(id);
         log.info("Successfully deleted employee with id: {}", id);
-    }*/
+    }
 }
