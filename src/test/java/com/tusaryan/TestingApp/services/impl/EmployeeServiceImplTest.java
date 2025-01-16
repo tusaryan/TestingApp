@@ -24,10 +24,12 @@ import org.springframework.context.annotation.Import;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+//Earlier, 7.6
+//click on the method name and press "cmd+shift+t" to create a test for that method
 
 @Import(TestContainerConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -157,6 +159,82 @@ class EmployeeServiceImplTest {
         //since it is failing, so verify that employeeRepository never calls the save method.
         verify(employeeRepository, never()).save(any());
 
+    }
+
+    @Test
+    void testUpdateEmployee_whenAttemptingToUpdateEmail_thenThrowException () {
+        when(employeeRepository.findById(mockEmployeeDto.getId())).thenReturn(Optional.of(mockEmployee));
+        mockEmployeeDto.setName("Random");
+        mockEmployeeDto.setEmail("random@gmail.com");
+
+//        act and assert
+
+        assertThatThrownBy(() -> employeeService.updateEmployee(mockEmployeeDto.getId(), mockEmployeeDto))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("The email of the employee cannot be updated");
+
+        verify(employeeRepository).findById(mockEmployeeDto.getId());
+        verify(employeeRepository, never()).save(any());
+    }
+
+    @Test
+    void testUpdateEmployee_whenValidEmployee_thenUpdateEmployee() {
+//        arrange
+        when(employeeRepository.findById(mockEmployeeDto.getId())).thenReturn(Optional.of(mockEmployee));
+        mockEmployeeDto.setName("Tunu");
+        mockEmployeeDto.setSalary(400L);
+
+        Employee newEmployee = modelMapper.map(mockEmployeeDto, Employee.class);
+        when(employeeRepository.save(any(Employee.class))).thenReturn(newEmployee);
+
+//        act
+        EmployeeDto updatedEmployee = employeeService.updateEmployee(mockEmployeeDto.getId(), mockEmployeeDto);
+
+        assertThat(updatedEmployee).isNotNull();
+        //check that how Equals method is implemented inside mockEmployeeDto i.e., EmployeeDto which is used below,
+        // if not implemented then implement it yourself
+        assertThat(updatedEmployee).isEqualTo(mockEmployeeDto);
+
+//        verify(employeeRepository).findById(mockEmployeeDto.getId());
+//        or
+        verify(employeeRepository).findById(1L);
+
+//        verify(employeeRepository).save(any(Employee.class));
+//        or
+        verify(employeeRepository).save(any());
+    }
+
+    @Test
+    void testDeleteEmployee_whenEmployeeDoesNotExists_thenThrowException () {
+//        arrange
+//        when(employeeRepository.existsById(mockEmployeeDto.getId())).thenReturn(false);
+        when(employeeRepository.existsById(1L)).thenReturn(false);
+
+//        act
+//        assertThatThrownBy(() -> employeeService.deleteEmployee(mockEmployeeDto.getId()))
+        assertThatThrownBy(() -> employeeService.deleteEmployee(1L))
+                .isInstanceOf(ResourceNotFoundException.class)
+//                .hasMessage("Employee not found with id: " + mockEmployeeDto.getId());
+                .hasMessage("Employee not found with id: " + 1L);
+
+//        assert
+        verify(employeeRepository, never()).deleteById(anyLong());
+
+    }
+
+    @Test
+    void testDeleteEmployee_whenEmployeeIsValid_thenDeleteEmployee() {
+//        when(employeeRepository.existsById(mockEmployeeDto.getId())).thenReturn(true);
+        when(employeeRepository.existsById(1L)).thenReturn(true);
+
+        //to check if this method does not fall into any exception,
+        assertThatCode(() -> employeeService.deleteEmployee(1L))
+                .doesNotThrowAnyException();
+
+        //we also have a method for "assertThat" when we're not returning anything from a method
+
+//        verify(employeeRepository).deleteById(mockEmployeeDto.getId());
+        verify(employeeRepository).deleteById(1L);
     }
 
 }

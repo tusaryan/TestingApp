@@ -65,6 +65,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         modelMapper.map(employeeDto, employee);
+        //once all the fields are converted to employee entity then,
+        //we ensure that id is same by assign it as what has been passed by method
         employee.setId(id);
 
         Employee savedEmployee = employeeRepository.save(employee);
@@ -81,6 +83,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new ResourceNotFoundException("Employee not found with id: " + id);
         }
 
+        //we don't have to write test case for this since it is a simple delete operation and returns nothing,
+        // so even we don't do anything it will be executed
         employeeRepository.deleteById(id);
         log.info("Successfully deleted employee with id: {}", id);
     }
