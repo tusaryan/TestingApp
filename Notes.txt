@@ -1,0 +1,9 @@
+L7.7
+
+if we only use @SpringBootTest with WebTestClient then it will not work with error: Error creating bean of WebTestClient,
+since SpringBootTest creates a mock server (due "mock" port configured as default in "webEnvironment")
+but to run WebTestClient we need to run a real server.
+to create and run a real http server configure the port using "webEnvironment" attribute of @SpringBootTest
+Eg: @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
+Shift+Fn+F6 -> to use refractor to enable all instances of a variable
