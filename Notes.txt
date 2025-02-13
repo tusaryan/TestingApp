@@ -31,3 +31,6 @@ for adding support for docker images inside CodePipeline for build process and t
 
 Solution: provide your docker login credentials to fix this and the way is specify it in your buildspec.yml file as env variable and specify env variable value inside the CodeBuild Environment using the edit option of that build instance
 (CodeBuild Dashboard left section menu > Build> Build Projects> "choose your build service project" > Edit> Environment> Additional Config> Add Environment variables for Docker Credential)
+
+28:26 - creating pipeline for dev and basic setup for it
+
