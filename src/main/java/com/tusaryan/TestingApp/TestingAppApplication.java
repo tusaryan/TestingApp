@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TestingAppApplication implements CommandLineRunner {
 
-	private final DataService dataService;
+//	private final DataService dataService;
 
 	@Value("${my.variable}")
 	private String myVariable;
@@ -25,6 +25,6 @@ public class TestingAppApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		System.out.println("my variable: " + myVariable);
-		System.out.println("The data is: "+dataService.getData());
+//		System.out.println("The data is: "+dataService.getData());
 	}
 }

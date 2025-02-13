@@ -1,4 +1,7 @@
 L7.7
+Note: in AWS only one environment with one EC2 instance is free,
+if we want to create multiple environments or more things than it will be charged.
+
 
 if we only use @SpringBootTest with WebTestClient then it will not work with error: Error creating bean of WebTestClient,
 since SpringBootTest creates a mock server (due "mock" port configured as default in "webEnvironment")
@@ -7,3 +10,12 @@ to create and run a real http server configure the port using "webEnvironment" a
 Eg: @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 Shift+Fn+F6 -> to use refractor to enable all instances of a variable
+
+echo $JAVA_HOME - to check java version in terminal
+
+cmd+, -> to open settings in intellij and configure java version to create jar file accordingly
+
+cmd+ : -> to open Project structure
+
+Always perform clean operation using maven before creating a fresh build jar file for production deployment to get
+changes in project take effect.
