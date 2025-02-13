@@ -19,3 +19,15 @@ cmd+ : -> to open Project structure
 
 Always perform clean operation using maven before creating a fresh build jar file for production deployment to get
 changes in project take effect.
+
+
+18:30 - visit build projects< codebuild< Developer Tools link: https://ap-south-1.console.aws.amazon.com/codesuite/codebuild/projects/employee-service-build-project/details
+
+
+
+for adding support for docker images inside CodePipeline for build process and testing while build
+
+21:34 - Reason to unable pull docker images since docker has limited its download limit for anonymous users
+
+Solution: provide your docker login credentials to fix this and the way is specify it in your buildspec.yml file as env variable and specify env variable value inside the CodeBuild Environment using the edit option of that build instance
+(CodeBuild Dashboard left section menu > Build> Build Projects> "choose your build service project" > Edit> Environment> Additional Config> Add Environment variables for Docker Credential)
