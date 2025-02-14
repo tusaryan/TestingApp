@@ -34,3 +34,8 @@ Solution: provide your docker login credentials to fix this and the way is speci
 
 28:26 - creating pipeline for dev and basic setup for it
 
+L8.5
+6:46 - two types/ways of development procedures
+
+7:39 - why use validate config in hibernate ddl auto property
+
